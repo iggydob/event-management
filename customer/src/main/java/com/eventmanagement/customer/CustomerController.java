@@ -1,19 +1,42 @@
 package com.eventmanagement.customer;
 
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@Slf4j
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("api/v1/customers")
-public record CustomerController(CustomerService customerService) {
+public record CustomerController(CustomerServiceImpl customerServiceImpl) {
 
     @PostMapping
     public void registerCustomer(@RequestBody CustomerRegistrationRequest customerRegistrationRequest) {
-        log.info("new customer registration {}", customerRegistrationRequest);
-        customerService.registerCustomer(customerRegistrationRequest);
+        customerServiceImpl.registerCustomer(customerRegistrationRequest);
+    }
+
+    @GetMapping
+    public List<Customer> get() {
+        return customerServiceImpl.get();
+    }
+
+    @GetMapping("/{customerId}")
+    public Optional<Customer> get(@PathVariable Integer customerId) {
+        return customerServiceImpl.get(customerId);
+    }
+
+    @PutMapping("/{customerId}/{commandLine}")
+    public void update(@PathVariable Integer customerId,
+                       @PathVariable String commandLine) {
+
+        switch (commandLine) {
+            case "promote":
+                customerServiceImpl.promote(customerId);
+                break;
+            case "demote":
+                customerServiceImpl.demote(customerId);
+                break;
+            default:
+                break;
+        }
     }
 }

@@ -3,12 +3,14 @@ package com.eventmanagement.customer;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
+
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Customer {
+public class Customer implements Serializable {
 
     @Id
     @SequenceGenerator(

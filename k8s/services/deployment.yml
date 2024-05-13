@@ -5,7 +5,7 @@ metadata:
   labels:
     app: customer
 spec:
-  replicas: 3 # Increase replicas for high availability
+  replicas: 0 # Increase replicas for high availability
   selector:
     matchLabels:
       app: customer

@@ -27,4 +27,5 @@ public class Customer implements Serializable {
     private String lastName;
     private String email;
     private Integer tier;
+    private String imageUrl;
 }

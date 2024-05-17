@@ -29,22 +29,6 @@ public record CustomerController(CustomerServiceImpl customerServiceImpl) {
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-//    @PutMapping("/{customerId}/{commandLine}")
-//    public void update(@PathVariable Integer customerId,
-//                       @PathVariable String commandLine) {
-//
-//        switch (commandLine) {
-//            case "promote":
-//                customerServiceImpl.promote(customerId);
-//                break;
-//            case "demote":
-//                customerServiceImpl.demote(customerId);
-//                break;
-//            default:
-//                break;
-//        }
-//    }
-
     @PutMapping("/update")
     public ResponseEntity<Customer> update(@RequestBody Customer customer) {
         Customer updateCustomer = customerServiceImpl.update(customer);

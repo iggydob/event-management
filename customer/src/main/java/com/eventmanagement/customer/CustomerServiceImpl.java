@@ -15,6 +15,7 @@ public record CustomerServiceImpl(CustomerRepository customerRepository) {
                 .lastName(request.lastName())
                 .email(request.email())
                 .tier(1)
+                .imageUrl("https://www.writeups.org/wp-content/uploads/Harry-Potter-Philosopher-Stone-era.jpg")
                 .build();
         customerRepository.save(customer);
         return customer;
@@ -28,18 +29,6 @@ public record CustomerServiceImpl(CustomerRepository customerRepository) {
         return customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException("Customer #" + customerId + "was not found."));
     }
-
-//    public void promote(int customerId) {
-//        Customer customer = customerRepository.getReferenceById(customerId);
-//        customer.setTier(2);
-//        customerRepository.save(customer);
-//    }
-//
-//    public void demote(int customerId) {
-//        Customer customer = customerRepository.getReferenceById(customerId);
-//        customer.setTier(1);
-//        customerRepository.save(customer);
-//    }
 
     public Customer update(Customer customer) {
         return customerRepository.save(customer);
